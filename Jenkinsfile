@@ -2,13 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                // Assuming your Git integration is already set up
-                checkout scm
-            }
-        }
-
+     
         stage('Build with Maven in Docker') {
             steps {
                 script {
@@ -27,11 +21,7 @@ pipeline {
             }
         }
 
-        stage('Hello World') {
-            steps {
-                echo 'Hello, World!'
-            }
-        }
+       
     }
 
     post {
