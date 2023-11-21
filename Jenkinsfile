@@ -2,36 +2,19 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                // Assuming your Git integration is already set up
-                checkout scm
-            }
-        }
-
         stage('Build') {
             steps {
-                // Define Maven tool installation
-                def mvnHome = tool 'Maven3'
+                script {
+                    // Define Maven tool installation
+                    def mvnHome = tool 'Maven3'
 
-                // Run Maven build
-                sh "${mvnHome}/bin/mvn clean install"
+                    // Run Maven build
+                    sh "${mvnHome}/bin/mvn clean install"
+                }
             }
         }
 
-        stage('Test') {
-            steps {
-                echo 'Run tests'
-                // Add commands to run your tests if applicable
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                echo 'Deploy app'
-                // Add commands for deployment if applicable
-            }
-        }
+        // Add other stages as needed
 
         stage('Hello World') {
             steps {
