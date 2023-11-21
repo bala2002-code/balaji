@@ -32,6 +32,12 @@ pipeline {
                 // Add commands for deployment if applicable
             }
         }
+
+        stage('Hello World') {
+            steps {
+                echo 'Hello, World!'
+            }
+        }
     }
 
     post {
