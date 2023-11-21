@@ -2,30 +2,39 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('build') {
             steps {
-                script {
-                    // Define Maven tool installation
-                    def mvnHome = tool 'Maven3'
-
-                    // Run Maven build
-                    sh "${mvnHome}/bin/mvn clean install"
-                }
+                echo 'build app'
+            
             }
         }
-
-        // Add other stages as needed
-
-        stage('Hello World') {
+        stage('this') {
             steps {
-                echo 'Hello, World!'
+                echo 'balaji'
             }
         }
+        stage('balaji') {
+            steps {
+                echo '20mic0113'
+            }
+        }
+         stage('test') {
+            steps {
+                echo 'hello world'            }
+        }
+         stage('deploy') {
+            steps {
+                echo 'deploy app'
+            }
+        }
+        
     }
-
-    post {
-        always {
-            emailext body: 'summary', subject: 'Pipeline Status', to: 'balaji.g2020@vitstudent.ac.in'
+        
+    post
+    {
+        always
+        {
+            emailext body: 'summary', subject: 'pipeline status', to: 'balaji.g2020@vitstudent.ac.in'
         }
     }
 }
