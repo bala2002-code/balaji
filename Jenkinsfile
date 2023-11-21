@@ -5,6 +5,17 @@ pipeline {
         stage('build') {
             steps {
                 echo 'build app'
+            
+            }
+        }
+        stage('this') {
+            steps {
+                echo 'balaji'
+            }
+        }
+        stage('balaji') {
+            steps {
+                echo '20mic0113'
             }
         }
          stage('test') {
@@ -19,6 +30,7 @@ pipeline {
         }
         
     }
+        
     post
     {
         always
