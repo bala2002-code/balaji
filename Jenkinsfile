@@ -2,39 +2,41 @@ pipeline {
     agent any
 
     stages {
-        stage('build') {
+        stage('Checkout') {
             steps {
-                echo 'build app'
-            
+                // Assuming your Git integration is already set up
+                checkout scm
             }
         }
-        stage('this') {
+
+        stage('Build with Maven in Docker') {
             steps {
-                echo 'balaji'
+                script {
+                    // Define Maven tool installation
+                    def mvnHome = tool 'Maven3'
+
+                    // Run Maven build inside a Maven Docker container
+                    docker.image('maven:3-alpine').inside('-v $HOME/.m2:/root/.m2') {
+                        // Copy the Maven settings.xml file if needed
+                        sh 'cp /usr/share/maven/ref/settings-docker.xml $HOME/.m2/settings.xml'
+                        
+                        // Run Maven build
+                        sh "${mvnHome}/bin/mvn clean install"
+                    }
+                }
             }
         }
-        stage('balaji') {
+
+        stage('Hello World') {
             steps {
-                echo '20mic0113'
+                echo 'Hello, World!'
             }
         }
-         stage('test') {
-            steps {
-                echo 'hello world'            }
-        }
-         stage('deploy') {
-            steps {
-                echo 'deploy app'
-            }
-        }
-        
     }
-        
-    post
-    {
-        always
-        {
-            emailext body: 'summary', subject: 'pipeline status', to: 'balaji.g2020@vitstudent.ac.in'
+
+    post {
+        always {
+            emailext body: 'summary', subject: 'Pipeline Status', to: 'balaji.g2020@vitstudent.ac.in'
         }
     }
 }
