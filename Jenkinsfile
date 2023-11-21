@@ -10,12 +10,12 @@ pipeline {
         }
         stage('this') {
             steps {
-                echo 'balaji'
+                echo 'sriram'
             }
         }
         stage('balaji') {
             steps {
-                echo '20mic0113'
+                echo '20mic0159'
             }
         }
          stage('test') {
