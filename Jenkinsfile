@@ -2,40 +2,41 @@ pipeline {
     agent any
 
     stages {
-        stage('build') {
+        stage('Checkout') {
             steps {
-                echo 'build app'
-            
+                // Assuming your Git integration is already set up
+                checkout scm
             }
         }
-        stage('this') {
+
+        stage('Build') {
             steps {
-                echo 'balaji'
+                // Define Maven tool installation
+                def mvnHome = tool 'Maven3'
+
+                // Run Maven build
+                sh "${mvnHome}/bin/mvn clean install"
             }
         }
-        stage('balaji') {
+
+        stage('Test') {
             steps {
-                echo '20mic0113'
+                echo 'Run tests'
+                // Add commands to run your tests if applicable
             }
         }
-         stage('test') {
+
+        stage('Deploy') {
             steps {
-                echo 'test app'
+                echo 'Deploy app'
+                // Add commands for deployment if applicable
             }
         }
-         stage('deploy') {
-            steps {
-                echo 'deploy app'
-            }
-        }
-        
     }
-        
-    post
-    {
-        always
-        {
-            emailext body: 'summary', subject: 'pipeline status', to: 'balaji.g2020@vitstudent.ac.in'
+
+    post {
+        always {
+            emailext body: 'summary', subject: 'Pipeline Status', to: 'balaji.g2020@vitstudent.ac.in'
         }
     }
 }
